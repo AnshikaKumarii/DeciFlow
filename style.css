@@ -1,0 +1,46 @@
+*{box-sizing:border-box}body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;background:#f5f7fb;color:#172033}
+button,input,textarea,select{font:inherit}.app{display:flex;min-height:100vh}.sidebar{width:245px;background:#0b1020;color:#fff;padding:24px 16px;position:fixed;left:0;top:0;bottom:0}.brand{font-size:27px;font-weight:800;margin:0 10px 5px}.brand span{color:#1683ff}.tag{font-size:11px;color:#9aa5bc;margin:0 10px 25px}.nav button{display:block;width:100%;text-align:left;background:transparent;border:0;color:#b8c1d5;padding:13px 12px;border-radius:10px;margin:4px 0;cursor:pointer}.nav button.active,.nav button:hover{background:#18213a;color:#fff}.main{margin-left:245px;width:calc(100% - 245px);padding:28px 34px}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px}.top h1{margin:0;font-size:28px}.top p{margin:5px 0 0;color:#6d778c}.badge{background:#e9f3ff;color:#0878ed;padding:9px 13px;border-radius:20px;font-weight:700;font-size:12px}.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:22px}.card{background:#fff;border:1px solid #e7ebf2;border-radius:15px;padding:19px;box-shadow:0 4px 15px #1720330a}.label{font-size:12px;color:#778197}.value{font-size:28px;font-weight:800;margin-top:7px}.blue{color:#0878ed}.green{color:#14a05a}.orange{color:#f08b18}.red{color:#df3e48}.panel{background:#fff;border:1px solid #e7ebf2;border-radius:15px;padding:22px;box-shadow:0 4px 15px #1720330a;margin-bottom:20px}.panel h2{margin:0 0 16px;font-size:18px}.row{display:flex;gap:15px;flex-wrap:wrap}.request{border:1px solid #e5e9f0;border-radius:12px;padding:17px;margin:10px 0;background:#fcfdff}.request-head{display:flex;justify-content:space-between;gap:10px}.request h3{margin:0 0 5px;font-size:16px}.muted{color:#737e92;font-size:13px}.status{padding:5px 9px;border-radius:14px;font-size:11px;font-weight:800}.pending{background:#fff3d8;color:#a66b00}.approved{background:#e1f8ed;color:#0b8b4e}.rejected{background:#ffe6e8;color:#c72c38}.escalated{background:#f0e5ff;color:#7c36ba}.btn{border:0;border-radius:9px;padding:10px 14px;cursor:pointer;font-weight:700}.primary{background:#0878ed;color:white}.success{background:#11a35b;color:white}.danger{background:#df3e48;color:white}.secondary{background:#eef2f7;color:#354157}.btn:disabled{opacity:.45;cursor:not-allowed}.actions{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}.field label{display:block;font-size:12px;font-weight:700;margin-bottom:7px;color:#566177}.field input,.field textarea,.field select{width:100%;padding:12px;border:1px solid #dce2eb;border-radius:9px;outline:none;background:white}.field textarea{min-height:135px;resize:vertical}.full{grid-column:1/-1}.extract{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.extract-box{background:#f7f9fc;border:1px solid #e4e9f1;border-radius:11px;padding:14px}.extract-box b{display:block;font-size:12px;color:#69758a;margin-bottom:5px}.confidence{font-size:30px;font-weight:900;color:#0878ed}.bar{height:9px;background:#e8edf4;border-radius:9px;overflow:hidden;margin-top:8px}.fill{height:100%;background:#0878ed}.log{display:grid;grid-template-columns:120px 1fr 90px;gap:10px;padding:12px 0;border-bottom:1px solid #edf0f5;font-size:13px}.log:last-child{border-bottom:0}.ok{color:#0b9954;font-weight:800}.warn{color:#b97900;font-weight:800}.table{width:100%;border-collapse:collapse}.table th,.table td{text-align:left;padding:12px;border-bottom:1px solid #edf0f5;font-size:13px}.empty{text-align:center;color:#7b8598;padding:35px}.toast{position:fixed;right:25px;bottom:25px;background:#0b1020;color:#fff;padding:14px 18px;border-radius:11px;box-shadow:0 10px 30px #0003;display:none;z-index:20}.modal-bg{position:fixed;inset:0;background:#08102099;display:none;align-items:center;justify-content:center;z-index:10}.modal{background:#fff;border-radius:16px;width:min(650px,92vw);padding:25px;max-height:90vh;overflow:auto}.close{float:right;border:0;background:#eef2f7;border-radius:8px;padding:7px 10px;cursor:pointer}.hero{background:linear-gradient(135deg,#0b1020,#152b52);color:#fff;border-radius:17px;padding:28px;margin-bottom:20px}.hero h2{margin:0 0 8px;font-size:25px}.hero p{margin:0;color:#c4d0e6}.timeline{display:flex;align-items:center;gap:0;margin-top:24px}.step{flex:1;text-align:center;font-size:11px}.dot{width:31px;height:31px;background:#1683ff;border-radius:50%;color:#fff;margin:auto auto 7px;display:flex;align-items:center;justify-content:center;font-weight:800}.line{height:2px;background:#4d6285;flex:1}.hidden{display:none!important}.footer{color:#8b94a7;font-size:11px;margin-top:25px}
+@media(max-width:900px){.sidebar{width:190px}.main{margin-left:190px;width:calc(100% - 190px);padding:20px}.cards{grid-template-columns:repeat(2,1fr)}.extract{grid-template-columns:1fr}.form-grid{grid-template-columns:1fr}.full{grid-column:auto}}
+@media(max-width:650px){.sidebar{position:static;width:100%;height:auto}.app{display:block}.main{margin:0;width:100%}.cards{grid-template-columns:1fr 1fr}.top{align-items:flex-start}.timeline{overflow:auto}.step{min-width:100px}}
+
+/* ===== DeciFlow Finalist UI Upgrade ===== */
+:root{
+  --ink:#111827;--muted:#667085;--line:#e7ebf2;--surface:#fff;
+  --blue:#2563eb;--blue2:#4f46e5;--green:#12a66a;--orange:#f59e0b;--red:#ef4444;
+}
+body{background:linear-gradient(135deg,#f7f9fc 0%,#eef4ff 100%);color:var(--ink)}
+.sidebar{background:linear-gradient(180deg,#07111f 0%,#0c1830 100%);box-shadow:8px 0 30px rgba(16,24,40,.08)}
+.brand{letter-spacing:-1px}.brand span{color:#60a5fa}
+.nav button{transition:.2s transform,.2s background,.2s color}
+.nav button:hover{transform:translateX(3px)}
+.main{padding-top:30px}
+.top h1{letter-spacing:-.8px}.top:after{content:"";display:block}
+.hero{position:relative;overflow:hidden;background:radial-gradient(circle at 85% 20%,rgba(96,165,250,.28),transparent 28%),linear-gradient(135deg,#081426,#153b73);box-shadow:0 18px 45px rgba(37,99,235,.16)}
+.hero:after{content:"";position:absolute;width:180px;height:180px;border:1px solid rgba(255,255,255,.08);border-radius:50%;right:-60px;bottom:-90px}
+.cards .card{transition:.2s transform,.2s box-shadow}
+.cards .card:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(16,24,40,.09)}
+.panel{box-shadow:0 8px 25px rgba(16,24,40,.055);transition:.2s box-shadow}
+.panel:hover{box-shadow:0 12px 32px rgba(16,24,40,.07)}
+.btn{transition:.18s transform,.18s box-shadow}.btn:hover{transform:translateY(-1px);box-shadow:0 7px 16px rgba(16,24,40,.12)}
+.primary{background:linear-gradient(135deg,#2563eb,#4f46e5)}
+.success{background:linear-gradient(135deg,#0f9f63,#13b477)}
+.danger{background:linear-gradient(135deg,#e23b4a,#f05a65)}
+.badge{box-shadow:0 5px 14px rgba(37,99,235,.08)}
+.request{transition:.2s transform,.2s border,.2s box-shadow}
+.request:hover{transform:translateY(-2px);border-color:#cddaf2;box-shadow:0 10px 24px rgba(16,24,40,.07)}
+.extract-box{transition:.2s transform,.2s box-shadow}
+.extract-box:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(16,24,40,.06)}
+.confidence{background:linear-gradient(90deg,#2563eb,#7c3aed);-webkit-background-clip:text;background-clip:text;color:transparent}
+.bar{background:#e9edf5}.fill{background:linear-gradient(90deg,#2563eb,#6366f1)}
+.log{transition:.15s background;padding-left:10px;padding-right:10px;border-radius:8px}
+.log:hover{background:#f8fafc}
+.section-kicker{font-size:11px;font-weight:800;color:#667085;letter-spacing:.08em;text-transform:uppercase;margin-bottom:7px}
+.workflow-card{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:20px}
+.workflow-item{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);padding:13px;border-radius:12px;text-align:center}
+.workflow-item .num{font-size:11px;color:#93c5fd;font-weight:800}
+.workflow-item b{display:block;font-size:12px;margin-top:4px}
+.mini-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.health-row{padding:14px 0;border-bottom:1px solid #edf0f5}.health-row:last-child{border:0}
+.pulse{display:inline-block;width:8px;height:8px;background:#22c55e;border-radius:50%;box-shadow:0 0 0 5px rgba(34,197,94,.12);margin-right:7px}
+.kpi-note{font-size:11px;color:#7a8497;margin-top:5px}
+@media(max-width:800px){.workflow-card{grid-template-columns:1fr 1fr}.mini-grid{grid-template-columns:1fr}}

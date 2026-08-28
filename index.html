@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DeciFlow — AI Approval Automation</title>
+<link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+<div class="app">
+<aside class="sidebar">
+  <div class="brand">Deci<span>Flow</span></div>
+  <div class="tag">AI-powered human-in-the-loop approvals</div>
+  <div class="nav">
+    <button class="active" onclick="showPage('dashboard',this)">▦ &nbsp; Dashboard</button>
+    <button onclick="showPage('new',this)">＋ &nbsp; New Request</button>
+    <button onclick="showPage('approvals',this)">✓ &nbsp; Approvals</button>
+    <button onclick="showPage('logs',this)">◷ &nbsp; Run Logs</button>
+    <button onclick="showPage('analytics',this)">◒ &nbsp; Analytics</button>
+  </div>
+  <div class="footer">Prototype • HunterX • Notion Track</div>
+</aside>
+
+<main class="main">
+<section id="dashboard" class="page">
+  <div class="top"><div><h1>Operations Dashboard</h1><p>Requests, decisions and actions — all in one place.</p></div><span class="badge"><span class="pulse"></span>SYSTEM ONLINE · <span id="clock">LIVE</span></span></div>
+  <div class="hero">
+    <div class="section-kicker" style="color:#93c5fd">AI + HUMAN-IN-THE-LOOP AUTOMATION</div>
+    <h2>From messy request to accountable decision.</h2>
+    <p>DeciFlow turns unstructured requests into structured decisions — with confidence scoring, human approval, automated action and a complete audit trail.</p>
+    <div class="workflow-card">
+      <div class="workflow-item"><div class="num">01</div><b>Request</b></div>
+      <div class="workflow-item"><div class="num">02</div><b>AI Extracts</b></div>
+      <div class="workflow-item"><div class="num">03</div><b>Human Decides</b></div>
+      <div class="workflow-item"><div class="num">04</div><b>Action</b></div>
+      <div class="workflow-item"><div class="num">05</div><b>Audit Log</b></div>
+    </div>
+  </div>
+  <div class="cards">
+    <div class="card"><div class="label">TOTAL REQUESTS</div><div class="value blue" id="statTotal">0</div><div class="kpi-note">All submitted requests</div></div>
+    <div class="card"><div class="label">PENDING</div><div class="value orange" id="statPending">0</div><div class="kpi-note">Awaiting human decision</div></div>
+    <div class="card"><div class="label">APPROVED</div><div class="value green" id="statApproved">0</div><div class="kpi-note">Successfully completed</div></div>
+    <div class="card"><div class="label">REJECTED</div><div class="value red" id="statRejected">0</div><div class="kpi-note">Decision + reason logged</div></div>
+  </div>
+  <div class="panel"><h2>Recent Requests</h2><div id="recent"></div></div>
+  <div class="panel">
+    <div class="section-kicker">Why DeciFlow?</div>
+    <h2 style="margin-bottom:10px">Automation without losing control.</h2>
+    <div class="mini-grid">
+      <div class="health-row"><b>🤖 AI handles the messy part</b><div class="muted">Extracts useful fields from natural-language requests.</div></div>
+      <div class="health-row"><b>👤 Humans retain authority</b><div class="muted">Approvals, edits and rejections stay with the responsible person.</div></div>
+      <div class="health-row"><b>🛡 Confidence-aware routing</b><div class="muted">Ambiguous requests are pushed to human review instead of blindly automated.</div></div>
+      <div class="health-row"><b>📜 Nothing disappears</b><div class="muted">Every important transition is timestamped in the run log.</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="new" class="page hidden">
+  <div class="top"><div><h1>Submit New Request</h1><p>Send an unstructured request — DeciFlow will structure it.</p></div></div>
+  <div class="panel">
+    <div class="section-kicker">Live Demo Input</div>
+    <h2>Tell DeciFlow what you need</h2>
+    <p class="muted" style="margin-top:-8px;margin-bottom:18px">No rigid form required — the system reads the request and structures it automatically.</p>
+    <div class="form-grid">
+      <div class="field"><label>STUDENT / REQUESTER</label><input id="name" value="Rahul Sharma"></div>
+      <div class="field"><label>CONTACT</label><input id="contact" value="rahul@example.com"></div>
+      <div class="field full"><label>REQUEST</label><textarea id="request">Sir, I need permission to travel to Jaipur next Friday for a family function.</textarea></div>
+      <div class="field"><label>DEMO MODE</label><select id="demoMode"><option value="normal">Normal — high confidence</option><option value="ambiguous">Ambiguous — low confidence</option></select></div>
+      <div style="display:flex;align-items:end"><button class="btn primary" onclick="submitRequest()">Submit & Analyze with AI →</button></div>
+    </div>
+  </div>
+  <div id="aiResult" class="panel hidden"></div>
+</section>
+
+<section id="approvals" class="page hidden">
+  <div class="top"><div><h1>Human Approval Board</h1><p><span class="pulse"></span>AI assists. A human makes the final decision.</p></div><span class="badge">HUMAN GATE ACTIVE</span></div>
+  <div class="panel"><h2>Pending Requests</h2><div id="approvalList"></div></div>
+</section>
+
+<section id="logs" class="page hidden">
+  <div class="top"><div><h1>Live Run Log</h1><p>Every important transition is timestamped for traceability.</p></div></div>
+  <div class="panel"><div id="logsList"></div></div>
+</section>
+
+<section id="analytics" class="page hidden">
+  <div class="top"><div><h1>Analytics</h1><p>Operational visibility for coordinators and administrators.</p></div></div>
+  <div class="cards">
+    <div class="card"><div class="label">APPROVAL RATE</div><div class="value green" id="approvalRate">0%</div></div>
+    <div class="card"><div class="label">AVG. RESPONSE</div><div class="value blue">2m 14s</div></div>
+    <div class="card"><div class="label">LOG COVERAGE</div><div class="value blue">100%</div></div>
+    <div class="card"><div class="label">ESCALATIONS</div><div class="value orange" id="escCount">0</div></div>
+  </div>
+  <div class="panel">
+    <div style="display:flex;justify-content:space-between;gap:12px;align-items:center">
+      <h2 style="margin:0">Workflow Health</h2>
+      <button class="btn secondary" onclick="resetDemo()">Reset Demo Data</button>
+    </div>
+    <p class="muted">AI confidence routing</p>
+    <div style="margin:12px 0 20px"><div style="display:flex;justify-content:space-between;font-size:13px"><span>High confidence requests</span><b>78%</b></div><div class="bar"><div class="fill" style="width:78%"></div></div></div>
+    <p class="muted">Requests completed without manual re-entry</p>
+    <div><div style="display:flex;justify-content:space-between;font-size:13px"><span>Structured automatically</span><b>92%</b></div><div class="bar"><div class="fill" style="width:92%"></div></div></div>
+  </div>
+</section>
+</main>
+</div>
+
+<div id="toast" class="toast"></div>
+<div id="modalBg" class="modal-bg"><div class="modal" id="modal"></div></div>
+
+<script>
+const KEY='deciflow_demo_v1';
+let state=JSON.parse(localStorage.getItem(KEY)||'null')||{
+ requests:[], logs:[], escalations:0
+};
+
+function save(){localStorage.setItem(KEY,JSON.stringify(state));updateStats();}
+function now(){return new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit',second:'2-digit'});}
+function id(){return 'DF-'+Math.random().toString(36).slice(2,7).toUpperCase();}
+function toast(t){const x=document.getElementById('toast');x.textContent=t;x.style.display='block';setTimeout(()=>x.style.display='none',2300);}
+function showPage(id,btn){
+ document.querySelectorAll('.page').forEach(x=>x.classList.add('hidden'));
+ document.getElementById(id).classList.remove('hidden');
+ document.querySelectorAll('.nav button').forEach(x=>x.classList.remove('active'));
+ if(btn)btn.classList.add('active');
+ renderAll();
+}
+function updateStats(){
+ const r=state.requests;
+ document.getElementById('statTotal').textContent=r.length;
+ document.getElementById('statPending').textContent=r.filter(x=>x.status==='pending'||x.status==='escalated').length;
+ document.getElementById('statApproved').textContent=r.filter(x=>x.status==='approved').length;
+ document.getElementById('statRejected').textContent=r.filter(x=>x.status==='rejected').length;
+ const decided=r.filter(x=>x.status==='approved'||x.status==='rejected').length;
+ document.getElementById('approvalRate').textContent=decided?Math.round(r.filter(x=>x.status==='approved').length/decided*100)+'%':'0%';
+ document.getElementById('escCount').textContent=state.escalations;
+}
+function addLog(req,event,detail='',type='ok'){
+ state.logs.unshift({time:now(),event,detail,type,requestId:req?.id||'SYSTEM'});
+ save();
+}
+function extract(text,mode){
+ if(mode==='ambiguous') return {type:'General Permission',destination:'Not specified',date:'Tomorrow',reason:'Urgent request',confidence:48};
+ const dest=(text.match(/to\\s+([A-Za-z ]+?)(?:\\s+next|\\s+on|\\s+for|\\.|$)/i)||[])[1]?.trim()||'Jaipur';
+ return {type:/travel/i.test(text)?'Travel Permission':'General Permission',destination:dest,date:/next\\s+friday/i.test(text)?'Next Friday':'Tomorrow',reason:/family function/i.test(text)?'Family Function':'Request reason detected',confidence:94};
+}
+function submitRequest(){
+ const name=document.getElementById('name').value.trim()||'Anonymous';
+ const contact=document.getElementById('contact').value.trim();
+ const text=document.getElementById('request').value.trim();
+ const mode=document.getElementById('demoMode').value;
+ if(!text){toast('Please enter a request');return;}
+ const req={id:id(),name,contact,text,status:'pending',created:now(),data:extract(text,mode),mode};
+ state.requests.unshift(req);
+ addLog(req,'Request Received','Submitted from DeciFlow request form');
+ addLog(req,'AI Extraction Complete','Structured fields generated');
+ if(req.data.confidence<70)addLog(req,'Low Confidence — Human Review','Confidence '+req.data.confidence+'%','warn');
+ else addLog(req,'Confidence Scored','Confidence '+req.data.confidence+'%');
+ save(); renderAI(req); toast('Request analyzed and routed for approval');
+}
+function renderAI(req){
+ const d=req.data;
+ const box=document.getElementById('aiResult');box.classList.remove('hidden');
+ box.innerHTML=`<h2>AI Extraction Complete ✓</h2>
+ <div class="extract">
+  <div class="extract-box"><b>REQUEST TYPE</b>${d.type}</div>
+  <div class="extract-box"><b>DESTINATION</b>${d.destination}</div>
+  <div class="extract-box"><b>DATE</b>${d.date}</div>
+  <div class="extract-box"><b>REASON</b>${d.reason}</div>
+  <div class="extract-box"><b>REQUEST ID</b>${req.id}</div>
+  <div class="extract-box"><b>CONFIDENCE</b><div class="confidence">${d.confidence}%</div><div class="bar"><div class="fill" style="width:${d.confidence}%"></div></div></div>
+ </div>
+ <div class="actions"><button class="btn primary" onclick="showPage('approvals',document.querySelectorAll('.nav button')[2])">Open Human Approval Board →</button></div>`;
+}
+function card(r){
+ const statusClass=r.status==='approved'?'approved':r.status==='rejected'?'rejected':r.status==='escalated'?'escalated':'pending';
+ return `<div class="request">
+  <div class="request-head"><div><h3>${r.name} <span class="muted">• ${r.id}</span></h3><div class="muted">${r.data.type} · ${r.data.destination} · ${r.data.date}</div></div><span class="status ${statusClass}">${r.status.toUpperCase()}</span></div>
+  <p style="font-size:13px">${r.text}</p>
+  <div class="muted">AI Confidence: <b>${r.data.confidence}%</b> · Submitted ${r.created}</div>
+  <div class="actions">${r.status==='pending'||r.status==='escalated'?`<button class="btn success" onclick="approve('${r.id}')">✓ Approve</button><button class="btn danger" onclick="rejectReq('${r.id}')">✕ Reject</button><button class="btn secondary" onclick="escalate('${r.id}')">↗ Escalate</button>`:`<button class="btn secondary" onclick="viewRequest('${r.id}')">Inspect</button>`}</div>
+ </div>`;
+}
+function renderAll(){
+ updateStats();
+ document.getElementById('recent').innerHTML=state.requests.length?state.requests.slice(0,5).map(card).join(''):'<div class="empty">No requests yet. Use <b>New Request</b> to start the live demo.</div>';
+ const pending=state.requests.filter(r=>r.status==='pending'||r.status==='escalated');
+ document.getElementById('approvalList').innerHTML=pending.length?pending.map(card).join(''):'<div class="empty">All requests are handled. ✓</div>';
+ document.getElementById('logsList').innerHTML=state.logs.length?state.logs.slice(0,80).map(l=>`<div class="log"><b>${l.time}</b><span><b>${l.event}</b><br><span class="muted">${l.detail} · ${l.requestId}</span></span><span class="${l.type==='warn'?'warn':'ok'}">${l.type==='warn'?'REVIEW':'LOGGED'}</span></div>`).join(''):'<div class="empty">Run logs will appear here.</div>';
+}
+function find(id){return state.requests.find(r=>r.id===id);}
+function approve(id){
+ const r=find(id);if(!r)return;
+ r.status='approved';r.decided=now();
+ addLog(r,'Human Approved','Approved by coordinator');
+ addLog(r,'Action Triggered','Notification action started');
+ addLog(r,'Notification Sent','Requester notified successfully');
+ save();toast('Request approved — action triggered ✓');renderAll();
+}
+function rejectReq(id){
+ const r=find(id);if(!r)return;
+ openModal(`<button class="close" onclick="closeModal()">×</button><h2>Reject Request</h2><p class="muted">${r.name} · ${r.id}</p><div class="field"><label>REJECTION REASON</label><textarea id="rejectReason" placeholder="Explain why the request is rejected...">Insufficient information for approval.</textarea></div><div class="actions"><button class="btn danger" onclick="confirmReject('${id}')">Confirm Rejection</button><button class="btn secondary" onclick="closeModal()">Cancel</button></div>`);
+}
+function confirmReject(id){
+ const r=find(id),reason=document.getElementById('rejectReason').value.trim()||'Request rejected by coordinator.';
+ r.status='rejected';r.reason=reason;r.decided=now();
+ addLog(r,'Human Rejected',reason,'warn');
+ addLog(r,'Requester Notified','Rejection reason sent back to requester');
+ save();closeModal();toast('Request rejected and reason logged');renderAll();
+}
+function escalate(id){
+ const r=find(id);if(!r)return;
+ r.status='escalated';state.escalations++;
+ addLog(r,'Auto-Escalation','Pending threshold exceeded — backup approver notified','warn');
+ save();toast('Escalated to backup approver ↗');renderAll();
+}
+function viewRequest(id){
+ const r=find(id);
+ openModal(`<button class="close" onclick="closeModal()">×</button><h2>${r.name}</h2><p class="muted">${r.id} · ${r.status.toUpperCase()}</p><p>${r.text}</p><div class="extract"><div class="extract-box"><b>TYPE</b>${r.data.type}</div><div class="extract-box"><b>DESTINATION</b>${r.data.destination}</div><div class="extract-box"><b>DATE</b>${r.data.date}</div><div class="extract-box"><b>CONFIDENCE</b>${r.data.confidence}%</div></div>`);
+}
+function openModal(html){document.getElementById('modal').innerHTML=html;document.getElementById('modalBg').style.display='flex'}
+function closeModal(){document.getElementById('modalBg').style.display='none'}
+
+function resetDemo(){
+  if(!confirm('Reset all demo requests and logs?')) return;
+  localStorage.removeItem(KEY);
+  state={requests:[],logs:[],escalations:0};
+  seedDemo(); renderAll(); toast('Demo data reset ✓');
+}
+
+function seedDemo(){
+ if(state.requests.length)return;
+ const examples=[
+ {name:'Priya Verma',contact:'priya@example.com',text:'Sir, I need leave for tomorrow because I have a medical appointment.',mode:'normal'},
+ {name:'Aman Gupta',contact:'aman@example.com',text:'Sir I need permission for something urgent tomorrow.',mode:'ambiguous'}
+ ];
+ examples.forEach((e,i)=>{
+  const r={id:id(),name:e.name,contact:e.contact,text:e.text,status:i?'pending':'approved',created:now(),data:extract(e.text,e.mode),mode:e.mode};
+  state.requests.push(r);
+  state.logs.push({time:now(),event:'Request Received',detail:'Demo seed request',type:'ok',requestId:r.id});
+  state.logs.push({time:now(),event:'AI Extraction Complete',detail:'Confidence '+r.data.confidence+'%',type:r.data.confidence<70?'warn':'ok',requestId:r.id});
+  if(r.status==='approved'){state.logs.push({time:now(),event:'Human Approved',detail:'Approved by coordinator',type:'ok',requestId:r.id});state.logs.push({time:now(),event:'Notification Sent',detail:'Requester notified',type:'ok',requestId:r.id});}
+ });
+ save();
+}
+seedDemo();renderAll();
+setInterval(()=>{const c=document.getElementById('clock');if(c)c.textContent=new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit',second:'2-digit'});},1000);
+</script>
+</body>
+</html>
